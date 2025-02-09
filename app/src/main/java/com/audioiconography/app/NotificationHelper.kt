@@ -14,21 +14,26 @@ object NotificationHelper {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // Create Notification Channel for Android 8+ (Oreo and above)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 "Audio Icon",
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_LOW // Silent, stays in status bar
             )
             notificationManager.createNotificationChannel(channel)
         }
 
+        // Choose icon based on connection status
         val icon = if (isConnected) R.drawable.ic_headphones else R.drawable.ic_no_headphones
 
+        // Build the notification (silent, stays in status bar)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(icon)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setAutoCancel(true)
+            .setContentTitle("Audio Icon")
+            .setContentText(if (isConnected) "🎧 Headphones Connected" else "❌ Headphones Disconnected")
+            .setPriority(NotificationCompat.PRIORITY_LOW) // Prevents heads-up popup
+            .setOngoing(true) // Makes it persistent
             .build()
 
         if (isConnected) {

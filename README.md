@@ -1,4 +1,4 @@
-# 🎧 Audio Iconography (Beta)
+# 🎧 Audio Iconography (In progress)
 _A minimal Android app for detecting wired headphones and displaying an icon in the status bar._
 
 ## 🚧 Development Status  

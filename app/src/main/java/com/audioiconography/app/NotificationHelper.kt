@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 
 object NotificationHelper {
     private const val CHANNEL_ID = "audio_icon_channel"
@@ -35,15 +36,14 @@ object NotificationHelper {
 
         if (isConnected) {
             notificationBuilder.setOngoing(true) // Persistent when connected
+            notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
         } else {
-            notificationBuilder.setAutoCancel(true) // Removable when disconnected
-        }
+            notificationBuilder.setAutoCancel(true) // Allow user to swipe it away
+            notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
 
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
-
-        // Have the notification be cleared when headphones are disconnected
-        if (!isConnected) {
-            notificationManager.cancel(NOTIFICATION_ID)
+            // NEW: Cancel notification to make sure it disappears
+            val notificationManagerCompat = NotificationManagerCompat.from(context)
+            notificationManagerCompat.cancel(NOTIFICATION_ID)
         }
     }
 }

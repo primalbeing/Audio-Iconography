@@ -1,6 +1,7 @@
 package com.audioiconography.app
 
 import android.content.Context
+import android.content.Intent
 import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Bundle
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
             it.type == AudioDeviceInfo.TYPE_WIRED_HEADSET || it.type == AudioDeviceInfo.TYPE_USB_HEADSET
         }
 
-        NotificationHelper.showNotification(this, isWiredHeadsetConnected)
+        if (isWiredHeadsetConnected) {
+            val serviceIntent = Intent(this, HeadphoneService::class.java)
+            startService(serviceIntent)
+        }
     }
 }

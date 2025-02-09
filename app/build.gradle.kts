@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.audioiconography.app"
-    compileSdk = 35
+    compileSdk = 35 // Keep latest stable compile SDK
 
     defaultConfig {
         applicationId = "com.audioiconography.app"
-        minSdk = 21
-        targetSdk = 35
+        minSdk = 29 // Set to Android 10 (API 29) to avoid legacy issues
+        targetSdk = 35 // Targets the latest stable Android version
         versionCode = 1
         versionName = "1.0"
 
@@ -29,11 +29,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17 // ✅ Updated for latest compatibility
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17" // Uses Java 17 for better performance
     }
     buildFeatures {
         compose = true

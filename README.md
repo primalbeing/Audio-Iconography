@@ -1,39 +1,43 @@
-# 🎧 Audio Iconography (In progress)
-_A minimal Android app for detecting wired headphones and displaying an icon in the status bar._
+# Audio Iconography (In Progress)
 
-## 🚧 Development Status  
-This app is **still in development** and **may not always work as expected**. It was built to **fit a specific use case** as a personal project and as a favour to a friend. While it works in some scenarios, there are still a lot of **bugs, compatibility issues, and incomplete features**.
+Audio Iconography is a minimal Android app designed to detect wired headphones and display an icon in the status bar. It was created for a specific use case as a personal project and as a favour to a friend. While it works in some scenarios, it is still in development and has many bugs, compatibility issues, and incomplete features.
 
-At this stage, **testing is limited**, and the app may behave differently across devices due to their restrictions on background services. The goal is to make it a **lightweight, battery-efficient solution** that just works without unnecessary notifications or popups.
+## Development Status
 
-## 🔍 Features (In Progress)
-- **Persistent notification** when wired headphones are connected.
-- **Automatic detection** of headphone state.
-- **No unnecessary battery drain** (keeps CPU & background usage minimal).
+At this stage, testing is limited, and the app may behave differently across devices, especially those with background service restrictions such as Android 12+. The goal is to make it a lightweight, battery-efficient solution that operates seamlessly without unnecessary notifications or popups.
 
-## 🛠️ Known Issues & Limitations
-- **Notification may not always update correctly** when unplugging headphones.
-- **Android 12+ restrictions** may require additional permissions.
-- **Not heavily tested on different devices** (works best on Android 10+).
-- **No UI customization yet** (strictly function-based).
+The app has been released as a **pre-release version**, meaning the APK is harder to find. If you want to download it, check the **Releases** section of this repository on GitHub.
 
-## 🏗️ Why This App Exists  
-This project started as a **simple tool for a personal use case**, where existing apps either:
-- Had **too many unnecessary features**.
-- Were **poorly optimized** or consumed battery.
-- Required **unwanted permissions**.
+## Features (In Progress)
 
-Since I was already working on Android development, I decided to **build it from scratch** as a **favour for a friend** who wanted something **simpler and cleaner**. The app is now at an **alpha stage**, and improvements are ongoing.
+- Persistent notification when wired headphones are connected.
+- Automatic detection of headphone state.
+- Low battery usage by avoiding unnecessary background processes.
 
-## 🤝 Contributing  
-Since this app was built with **a specific use case in mind**, **collaborators are welcome** to improve it! If you're interested in helping:
-1. **Fork this repository**  
-2. **Submit a pull request** with improvements  
-3. **Open an issue** if you find a bug or have a feature suggestion  
+## Known Issues & Limitations
 
-Contributions related to **bug fixes, improved detection logic, UI refinements, and better compatibility** would be greatly appreciated!
+- The notification does not always update correctly when unplugging headphones.
+- Android 12+ restrictions may require additional permissions.
+- The app has not been tested extensively across different devices (best compatibility is with Android 10+).
+- No UI customization is available yet; it is strictly function-based.
 
-## 📜 License: GPLv3  
-This project is licensed under the **GNU General Public License v3.0 (GPLv3)**.  
+## Why This App Exists
 
-By keeping it under **GPLv3**, I want to ensure that **any improvements remain accessible to the community** and that this app stays **open-source forever**.
+This project started as a simple tool for a specific need. Many existing apps either had too many unnecessary features, were poorly optimized and consumed battery, or required unwanted permissions. 
+
+Since I was already working on Android development, I decided to build this from scratch as a favour for a friend who wanted something cleaner and more efficient. The project turned out to be more complex than expected, so please contribute or assist me in any way you can.
+
+## Contributing
+
+I welcome contributions because this project is more work than I initially anticipated. If you are interested in helping:
+1. Fork this repository.
+2. Submit a pull request with improvements.
+3. Open an issue if you find a bug or have a feature suggestion.
+
+Bug fixes, improvements to detection logic, UI refinements, and better device compatibility are especially needed.
+
+## License: GPLv3
+
+This project is licensed under the **GNU General Public License v3.0 (GPLv3)** to ensure that it remains open-source and that any improvements remain accessible to the community.
+
+If you want to test or contribute, check the **Releases** tab to find the latest APK.

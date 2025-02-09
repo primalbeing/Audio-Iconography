@@ -7,21 +7,25 @@ import android.util.Log
 
 class HeadphoneReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        Log.d("DEBUG", "HeadphoneReceiver triggered!")
+
         if (intent.action == Intent.ACTION_HEADSET_PLUG) {
             val state = intent.getIntExtra("state", -1)
-            Log.d("HeadphoneReceiver", "Headset state changed: $state")
+            Log.d("DEBUG", "Headset state changed: $state")
 
             when (state) {
                 1 -> {
-                    Log.d("HeadphoneReceiver", "🎧 Headphones Connected")
+                    Log.d("DEBUG", "🎧 Headphones Connected - Showing Notification")
                     NotificationHelper.showNotification(context, true)
                 }
                 0 -> {
-                    Log.d("HeadphoneReceiver", "❌ Headphones Disconnected")
+                    Log.d("DEBUG", "❌ Headphones Disconnected - Removing Notification")
                     NotificationHelper.showNotification(context, false)
                 }
-                else -> Log.d("HeadphoneReceiver", "Unknown headset state")
+                else -> Log.d("DEBUG", "Unknown headset state")
             }
+        } else {
+            Log.d("DEBUG", "Intent action did not match HEADSET_PLUG")
         }
     }
 }

@@ -1,8 +1,10 @@
 # Gradle files
 .gradle/
 build/
+**/build/
+**/.gradle/
 
-# Local configuration file (sdk path, etc)
+# Local configuration file (sdk path, etc.)
 local.properties
 
 # Log/OS Files
@@ -12,22 +14,62 @@ local.properties
 captures/
 .externalNativeBuild/
 .cxx/
-*.apk
-output.json
-
-# IntelliJ
-*.iml
 .idea/
+*.iml
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
-# Keystore files
+# APK and output files
+*.apk
+*.aab
+*.apks
+*.apkm
+*.obb
+output.json
+
+# Keystore files (DO NOT COMMIT THESE!)
+keystore/
 *.jks
 *.keystore
 
-# Google Services (e.g. APIs or Firebase)
+# Google Services (e.g. API keys, Firebase)
 google-services.json
+app/google-services.json
+fabric.properties
+crashlytics.properties
 
-# Android Profiling
+# Android Profiling & Debugging
 *.hprof
+*.trace
+*.replay
+
+# Dependency caches
+/.gradle/
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Virtual Machines & Emulator Files
+*.lock
+*.idx
+*.avd/
+*.lock
+*.log
+hs_err_pid*
+/.idea/httpRequests
+/.DS_Store
+
+# Other IDE settings
+.vscode/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Ignore gradle.properties (contains sensitive info)
+gradle.properties
+~/.gradle/gradle.properties

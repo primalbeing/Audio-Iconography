@@ -4,6 +4,8 @@
     <!-- Required for Foreground Services on Android 14+ -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
 
     <application
         android:allowBackup="true"

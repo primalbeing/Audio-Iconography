@@ -14,10 +14,11 @@ class NotificationReceiver : BroadcastReceiver() {
 
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (state == 0) {
-            nm.cancel(1) // Headphones unplugged, remove notification
+            nm.cancel(1) // Remove notification when unplugged
             return
         }
 
+        val channelId = "headphone_channel"
         val pendingIntent = PendingIntent.getActivity(
             context,
             0,
@@ -27,12 +28,14 @@ class NotificationReceiver : BroadcastReceiver() {
 
         val notification = Notification.Builder(context)
             .setSmallIcon(R.drawable.ic_headphones)
-            .setContentTitle("Headphones Connected")
+            .setContentTitle(context.getString(R.string.channel_name))
+            .setContentText(context.getString(R.string.channel_description))
             .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+            .setOngoing(true) // Makes notification persistent
+            .setAutoCancel(false) // Prevents accidental removal
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notification.setChannelId("headphone_channel")
+            notification.setChannelId(channelId)
         }
 
         nm.notify(1, notification.build())

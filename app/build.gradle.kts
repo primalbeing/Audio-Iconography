@@ -12,8 +12,8 @@ android {
         applicationId = "com.audioiconography.app"
         minSdk = 29 // Set to Android 10 (API 29) to avoid legacy issues
         targetSdk = 35 // Targets the latest stable Android version
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

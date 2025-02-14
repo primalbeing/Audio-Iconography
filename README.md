@@ -1,25 +1,18 @@
-# Audio Iconography (In Progress)
+# Audio Iconography (In Beta)
 
 Audio Iconography is a minimal Android app designed to detect wired headphones and display an icon in the status bar. It was created for a specific use case as a personal project and as a favour to a friend. While it works in some scenarios, it is still in development and has many bugs, compatibility issues, and incomplete features.
 
 ## Development Status
 
-At this stage, testing is limited, and the app may behave differently across devices, especially those with background service restrictions such as Android 12+. The goal is to make it a lightweight, battery-efficient solution that operates seamlessly without unnecessary notifications or popups.
+This app now works as intended in most scenarios. The goal is to make it a lightweight, battery-efficient solution that operates seamlessly without unnecessary notifications or popups.
 
-The app has been released as a **pre-release version**, meaning the APK is harder to find. If you want to download it, check the **Releases** section of this repository on GitHub.
+I still need to create an app icon and an option to alert if headphones disconnect if the user wants.
 
 ## Features (In Progress)
 
 - Persistent notification when wired headphones are connected.
 - Automatic detection of headphone state.
 - Low battery usage by avoiding unnecessary background processes.
-
-## Known Issues & Limitations
-
-- The notification does not always update correctly when unplugging headphones.
-- Android 12+ restrictions may require additional permissions.
-- The app has not been tested extensively across different devices (best compatibility is with Android 10+).
-- No UI customization is available yet; it is strictly function-based.
 
 ## Why This App Exists
 

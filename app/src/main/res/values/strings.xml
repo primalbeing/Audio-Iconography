@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Audio Iconography</string>
+    <string name="channel_name">Headphone Detection</string>
+    <string name="channel_description">Shows when wired headphones are connected</string>
 </resources>

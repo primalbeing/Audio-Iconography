@@ -29,9 +29,10 @@ android {
     }
 
     buildTypes {
-        getByName("release") { // Correct way to reference `release`
-            signingConfig = signingConfigs.getByName("release") // Proper reference
-            isMinifyEnabled = false
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true  // Enables code shrinking (removes unused code)
+            isShrinkResources = true // Removes unused resources (images, XML)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -56,7 +57,6 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
     // Jetpack Compose

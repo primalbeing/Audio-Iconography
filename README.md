@@ -1,6 +1,6 @@
 # Audio Iconography (In Beta)
 
-Audio Iconography is a minimal Android app designed to detect wired headphones and display an icon in the status bar. It was created for a specific use case as a personal project and as a favour to a friend. While it works in some scenarios, it is still in development and has many bugs, compatibility issues, and incomplete features.
+Audio Iconography is a minimal Android app designed to detect wired headphones and display an icon in the status bar. It was created for a specific use case as a personal project and as a favour to a friend. While it works in most scenarios, it is still in development.
 
 ## Development Status
 

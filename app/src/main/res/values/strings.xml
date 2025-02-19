@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Audio Iconography</string>
-    <string name="channel_name">Headphone Detection</string>
-    <string name="channel_description">Shows when wired headphones are connected</string>
+    <string name="service_running">Audio Icon Service is Running</string>
+    <string name="start_service">Start Service</string>
+    <string name="stop_service">Stop Service</string>
 </resources>

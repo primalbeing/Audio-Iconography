@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#121212"
     android:gravity="center"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <TextView
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🎧 Audio Iconography"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"/>
+        android:text="@string/service_running"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
-    <TextView
+    <Button
+        android:id="@+id/start_service_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This app displays an icon in the status bar when wired headphones are connected."
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:paddingTop="10dp"/>
+        android:text="@string/start_service"
+        android:layout_marginBottom="8dp"/>
 
+    <Button
+        android:id="@+id/stop_service_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_service"/>
 </LinearLayout>

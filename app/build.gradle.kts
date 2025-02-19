@@ -1,24 +1,22 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     namespace = "com.audioiconography.app"
-    compileSdk = 35 // Keep latest stable compile SDK
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.audioiconography.app"
-        minSdk = 29 // Set to Android 10 (API 29) to avoid legacy issues
-        targetSdk = 35 // Targets the latest stable Android version
+        minSdk = 29
+        targetSdk = 35
         versionCode = 2
         versionName = "1.1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // Securely load signingConfigs from gradle.properties or environment variables
     signingConfigs {
         create("release") {
             storeFile = file(System.getenv("KEYSTORE_FILE") ?: project.findProperty("KEYSTORE_FILE") as String)
@@ -31,8 +29,8 @@ android {
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = true  // Enables code shrinking (removes unused code)
-            isShrinkResources = true // Removes unused resources (images, XML)
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -41,37 +39,37 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17 // Updated for latest compatibility
+        sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17" // Uses Java 17 for better performance
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.6.0"
+    }
 }
 
 dependencies {
-    // AndroidX Core
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity.compose)
 
-    // Jetpack Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    // Compose dependencies
+    implementation("androidx.compose.ui:ui:1.6.0")
+    implementation("androidx.compose.ui:ui-tooling:1.6.0")
+    implementation("androidx.compose.material:material:1.6.0")
+    implementation("androidx.compose.ui:ui-graphics:1.6.0")
+    implementation("androidx.compose.compiler:compiler:1.6.0")
 
-    // Testing Dependencies
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

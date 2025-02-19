@@ -1,46 +1,47 @@
 package com.audioiconography.app
 
-import android.Manifest
-import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.audioiconography.app.ui.theme.AudioIconographyTheme
 
-class MainActivity : Activity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        registerNotificationChannel()
-        requestNotificationPermission()
 
-        setContentView(R.layout.activity_main)
-        startService(Intent(this, BackgroundService::class.java))
-    }
+        // Start the foreground service when the app launches
+        val serviceIntent = Intent(this, HeadphoneService::class.java)
+        startForegroundService(serviceIntent)
 
-    private fun registerNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = getString(R.string.channel_name)
-            val description = getString(R.string.channel_description)
-            val channel = NotificationChannel(
-                "headphone_channel",
-                name,
-                NotificationManager.IMPORTANCE_LOW
-            )
-            channel.description = description
-
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
+        setContent {
+            AudioIconographyTheme {
+                MainScreen()
+            }
         }
     }
+}
 
-    private fun requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+@Composable
+fun MainScreen() {
+    var isServiceRunning by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Audio Icon Service", style = MaterialTheme.typography.headlineMedium)
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        Button(onClick = { isServiceRunning = !isServiceRunning }) {
+            Text(text = if (isServiceRunning) "Stop Service" else "Start Service")
         }
     }
 }

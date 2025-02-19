@@ -1,33 +1,46 @@
 package com.audioiconography.app
 
-import android.app.Service
+import android.app.*
 import android.content.Intent
-import android.content.IntentFilter
-import android.hardware.usb.UsbManager
+import android.os.Build
 import android.os.IBinder
+import androidx.core.app.NotificationCompat
 
 class BackgroundService : Service() {
-    private lateinit var notificationReceiver: NotificationReceiver
 
     override fun onCreate() {
         super.onCreate()
-        val filter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
-        filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED)
-        filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED)
+        startForegroundService()
+    }
 
-        notificationReceiver = NotificationReceiver()
-        registerReceiver(notificationReceiver, filter)
+    private fun startForegroundService() {
+        val channelId = "background_service_channel"
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Background Service",
+                NotificationManager.IMPORTANCE_LOW
+            )
+            val manager = getSystemService(NotificationManager::class.java)
+            manager.createNotificationChannel(channel)
+        }
+
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setContentTitle("Background Service Running")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setOngoing(true)
+            .build()
+
+        startForeground(2, notification)
     }
 
     override fun onDestroy() {
-        unregisterReceiver(notificationReceiver)
+        super.onDestroy()
+        stopForeground(true)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return START_STICKY
     }
 }

@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -17,14 +16,25 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        create("release") {
-            storeFile = file(System.getenv("KEYSTORE_FILE") ?: project.findProperty("KEYSTORE_FILE") as String)
-            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: project.findProperty("KEYSTORE_PASSWORD") as String
-            keyAlias = System.getenv("KEY_ALIAS") ?: project.findProperty("KEY_ALIAS") as String
-            keyPassword = System.getenv("KEY_PASSWORD") ?: project.findProperty("KEY_PASSWORD") as String
+signingConfigs {
+    create("release") {
+        val keystorePath = System.getenv("KEYSTORE_FILE")
+        val keystorePassword = System.getenv("KEYSTORE_PASSWORD")
+        val keyAlias = System.getenv("KEY_ALIAS")
+        val keyPassword = System.getenv("KEY_PASSWORD")
+
+        if (!keystorePath.isNullOrBlank() && !keystorePassword.isNullOrBlank() &&
+            !keyAlias.isNullOrBlank() && !keyPassword.isNullOrBlank()) {
+            storeFile = file(keystorePath)
+            storePassword = keystorePassword
+            this.keyAlias = keyAlias
+            this.keyPassword = keyPassword
+        } else {
+            println("WARNING: Release signing config is disabled due to missing keystore properties.")
         }
     }
+}
+
 
     buildTypes {
         getByName("release") {

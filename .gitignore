@@ -72,5 +72,6 @@ hs_err_pid*
 
 # Ignore gradle.properties (contains sensitive info)
 gradle.properties
+local.properties
 android/gradle.properties
 ~/.gradle/gradle.properties

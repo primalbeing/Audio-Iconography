@@ -62,7 +62,7 @@ fun MainScreen() {
 
             // Centered Description
             Text(
-                text = "This app automatically detects when wired headphones are connected\nand displays a silent notification.",
+                text = "This app automatically detects when wired headphones are connected and displays a silent notification.",
                 color = Color.White,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(horizontal = 24.dp),
@@ -99,11 +99,18 @@ fun MainScreen() {
                         text = AnnotatedString("https://github.com/primalbeing/Audio-Iconography"),
                         onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/primalbeing/Audio-Iconography"))) },
                         modifier = Modifier.padding(start = 8.dp),
-                        style = MaterialTheme.typography.bodyLarge.copy(color = Color.Cyan)
+                        style = MaterialTheme.typography.bodyLarge.copy(color = Color(0xFFB0B0B0))
                     )
                 }
             },
-            confirmButton = { Button(onClick = { showDialog = false }) { Text("Close") } },
+            confirmButton = {
+                Button(
+                    onClick = { showDialog = false },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFAAAAAA)) // Light gray button
+                ) {
+                    Text("Close", color = Color.Black) // Black text for better contrast
+                }
+            },
             containerColor = Color.Black,
             textContentColor = Color.White
         )

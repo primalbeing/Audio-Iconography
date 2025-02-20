@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<full-backup-content>
-    <!-- Backup SharedPreferences -->
-    <include domain="sharedpref" path="." />
-    
-    <!-- Backup Databases -->
-    <include domain="database" path="." />
-
-    <!-- Exclude Cache Directories -->
-    <exclude domain="cache" path="." />
-    
-    <!-- Exclude No Backup Directory -->
-    <exclude domain="no_backup" path="." />
-</full-backup-content>
+<data-extraction-rules>
+    <full-backup-content>
+        <!-- Exclude cache files -->
+        <exclude domain="file" path="cache/" />
+        <!-- Exclude backup folder -->
+        <exclude domain="file" path="no_backup/" />
+    </full-backup-content>
+</data-extraction-rules>

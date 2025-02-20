@@ -10,13 +10,13 @@ android {
 
     defaultConfig {
         applicationId = "com.audioiconography.app"
-        minSdk = 21
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
+        minSdk = 23   // Increase from 21 to 23 to support modern APIs
+        targetSdk = 35
+        versionCode = 2
+        versionName = "1.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {

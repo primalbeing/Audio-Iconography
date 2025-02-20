@@ -37,7 +37,12 @@ class BackgroundService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        stopForeground(true)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE)
+        } else {
+            stopForeground(true)
+        }
+
     }
 
     override fun onBind(intent: Intent?): IBinder? {

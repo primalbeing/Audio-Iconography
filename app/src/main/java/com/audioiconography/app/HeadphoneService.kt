@@ -65,8 +65,15 @@ class HeadphoneService : Service() {
     }
 
     private fun isHeadphoneConnected(): Boolean {
-        return audioManager.isWiredHeadsetOn
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
+                .any { it.type == android.media.AudioDeviceInfo.TYPE_WIRED_HEADSET || it.type == android.media.AudioDeviceInfo.TYPE_WIRED_HEADPHONES }
+        } else {
+            @Suppress("DEPRECATION")
+            audioManager.isWiredHeadsetOn
+        }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

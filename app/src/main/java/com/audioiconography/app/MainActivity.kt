@@ -39,7 +39,7 @@ fun MainScreen() {
     ) {
         Text(text = "Audio Icon Service", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         Button(onClick = { isServiceRunning = !isServiceRunning }) {
             Text(text = if (isServiceRunning) "Stop Service" else "Start Service")
         }

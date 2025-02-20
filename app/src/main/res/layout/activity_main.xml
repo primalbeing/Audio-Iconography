@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@color/black">
 
-    <!-- Banner (App Name) -->
+    <!-- Header -->
     <TextView
-        android:id="@+id/app_title"
+        android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Audio Iconography"
+        android:text="🎧 Audio Iconography"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
-</LinearLayout>
+
+    <!-- Menu Button (Top-Right Corner) -->
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_menu"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Menu"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Centered Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/centerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎧 Audio Iconography"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/centerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This app automatically detects when wired headphones are connected\nand displays a silent notification."
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -11,6 +11,7 @@ class HeadphoneService : Service() {
 
     private lateinit var audioManager: AudioManager
     private lateinit var receiver: BroadcastReceiver
+    private val CHANNEL_ID = "audio_icon_channel"
 
     override fun onCreate() {
         super.onCreate()
@@ -21,7 +22,11 @@ class HeadphoneService : Service() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 if (intent?.action == AudioManager.ACTION_HEADSET_PLUG) {
                     val state = intent.getIntExtra("state", -1)
-                    updateNotification(state == 1)
+                    if (state == 1) {
+                        showNotification()
+                    } else if (state == 0) {
+                        stopForeground(true) // Remove notification when unplugged
+                    }
                 }
             }
         }
@@ -29,39 +34,34 @@ class HeadphoneService : Service() {
         val filter = IntentFilter(AudioManager.ACTION_HEADSET_PLUG)
         registerReceiver(receiver, filter)
 
-        startForegroundService()
+        // Start foreground service (but no notification shown until headphones are connected)
+        if (isHeadphoneConnected()) {
+            showNotification()
+        }
     }
 
-    private fun startForegroundService() {
-        val channelId = "audio_icon_channel"
+    private fun showNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                channelId,
+                CHANNEL_ID,
                 "Audio Icon Service",
                 NotificationManager.IMPORTANCE_LOW
-            )
+            ).apply {
+                setSound(null, null)  // Silent notification
+                enableVibration(false)
+            }
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
         }
 
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Audio Icon Running")
-            .setSmallIcon(if (isHeadphoneConnected()) R.drawable.ic_headphones else R.drawable.ic_no_headphones)
-            .setOngoing(true)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("Headphones Connected")
+            .setSmallIcon(R.drawable.ic_headphones)
+            .setOngoing(true) // Persistent notification
+            .setPriority(NotificationCompat.PRIORITY_LOW) // Silent
             .build()
 
         startForeground(1, notification)
-    }
-
-    private fun updateNotification(isHeadphoneConnected: Boolean) {
-        val notification = NotificationCompat.Builder(this, "audio_icon_channel")
-            .setContentTitle("Audio Icon Running")
-            .setSmallIcon(if (isHeadphoneConnected) R.drawable.ic_headphones else R.drawable.ic_no_headphones)
-            .setOngoing(true)
-            .build()
-
-        val manager = getSystemService(NotificationManager::class.java)
-        manager.notify(1, notification)
     }
 
     private fun isHeadphoneConnected(): Boolean {
@@ -73,7 +73,6 @@ class HeadphoneService : Service() {
             audioManager.isWiredHeadsetOn
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

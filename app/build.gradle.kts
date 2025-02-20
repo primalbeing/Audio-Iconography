@@ -6,15 +6,31 @@ plugins {
 
 android {
     namespace = "com.audioiconography.app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.audioiconography.app"
-        minSdk = 23   // Increase from 21 to 23 to support modern APIs
+        minSdk = 29 
         targetSdk = 35
         versionCode = 2
         versionName = "1.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+         ndk {
+            abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64", "mips", "mips64"))
+        }
+
+        versionCode = 20000
+        versionName = "2.0.0"
+
+    }
+
+
+    applicationVariants.configureEach {
+        outputs.configureEach {
+            val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            output.outputFileName = "Audio-Iconography-v${versionName}.apk"
+        }
     }
 
 

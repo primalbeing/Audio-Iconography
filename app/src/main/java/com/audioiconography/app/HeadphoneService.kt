@@ -2,6 +2,7 @@ package com.audioiconography.app
 
 import android.app.*
 import android.content.*
+import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Build
 import android.os.IBinder
@@ -16,6 +17,9 @@ class HeadphoneService : Service() {
     override fun onCreate() {
         super.onCreate()
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        // FIX #1: START FOREGROUND SERVICE IMMEDIATELY
+        startForegroundServiceSafe()
 
         // Register BroadcastReceiver for headphone state changes
         receiver = object : BroadcastReceiver() {
@@ -34,13 +38,14 @@ class HeadphoneService : Service() {
         val filter = IntentFilter(AudioManager.ACTION_HEADSET_PLUG)
         registerReceiver(receiver, filter)
 
-        // Start foreground service (but no notification shown until headphones are connected)
+        // Fix #2: Manually check if headphones are already connected
         if (isHeadphoneConnected()) {
             showNotification()
         }
     }
 
-    private fun showNotification() {
+    // Ensures Foreground Service is started safely
+    private fun startForegroundServiceSafe() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -55,19 +60,41 @@ class HeadphoneService : Service() {
         }
 
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Headphones Connected")
+            .setContentTitle("Audio Iconography Running")
             .setSmallIcon(R.drawable.ic_headphones)
-            .setOngoing(true) // Persistent notification
-            .setPriority(NotificationCompat.PRIORITY_LOW) // Silent
+            .setOngoing(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
 
         startForeground(1, notification)
     }
 
+    // FIX #2: REQUEST NOTIFICATION PERMISSION
+    fun requestNotificationPermission(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val intent = Intent("android.settings.APP_NOTIFICATION_SETTINGS").apply {
+                putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
+            }
+            context.startActivity(intent)
+        }
+    }
+
+    private fun showNotification() {
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("Headphones Connected")
+            .setSmallIcon(R.drawable.ic_headphones)
+            .setOngoing(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .build()
+
+        startForeground(1, notification)
+    }
+
+    // Fix #3: Reliable Headphone Detection for All Devices
     private fun isHeadphoneConnected(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
-                .any { it.type == android.media.AudioDeviceInfo.TYPE_WIRED_HEADSET || it.type == android.media.AudioDeviceInfo.TYPE_WIRED_HEADPHONES }
+                .any { it.type == AudioDeviceInfo.TYPE_WIRED_HEADSET || it.type == AudioDeviceInfo.TYPE_WIRED_HEADPHONES }
         } else {
             @Suppress("DEPRECATION")
             audioManager.isWiredHeadsetOn

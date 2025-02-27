@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Audio Iconography</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="channel_name">Headphone Channel</string>
+    <string name="channel_description">Shows a notification when headphones are plugged in</string>
 </resources>

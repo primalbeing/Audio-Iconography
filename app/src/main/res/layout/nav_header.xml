@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="48dp"
+    android:padding="48dp"
+    android:background="#212121">
+
+    <!-- App Name -->
+    <TextView
+        android:id="@+id/tvHeaderAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Audio Iconography"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Author Section -->
+    <TextView
+        android:id="@+id/tvAuthorTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:textColor="#CCCCCC"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/tvAuthorValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Primal Being"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Version Section -->
+    <TextView
+        android:id="@+id/tvVersionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version"
+        android:textColor="#CCCCCC"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvVersionValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1.2.1"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Source Code Section (optional) -->
+    <TextView
+        android:id="@+id/tvSourceTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Source Code"
+        android:textColor="#CCCCCC"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvSourceValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="https://github.com/primalbeing/audio-iconography"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:textColor="#AAAAAA"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
+</LinearLayout>
